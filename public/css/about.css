@@ -1,0 +1,53 @@
+/* Responsive logo sizing. */
+.navbar-brand img {
+  max-width: 100px;
+  height: auto;
+}
+
+/* Responsive logo size for mobile. */
+@media (max-width: 768px) {
+  .navbar-brand img {
+    max-width: 60px;
+  }
+}
+
+header nav.navbar {
+  box-shadow: 0 4px 8px 0 #DDA5C8;
+  border: solid 1px !important;
+  border-color: #BA8B9F !important;
+}
+
+.btn-primary {
+  background-color: #DDA5C8 !important;
+  border: solid 1px !important;
+  border-color: #BA8B9F !important;
+  box-shadow: 0 4px 8px 0 #000000;
+  font-weight: bold;
+  transition: background-color 0.3s, box-shadow 0.3s;
+  /* Smooth transition for hover effects */
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: #C98AB7 !important;
+  /* Darker shade on hover */
+  box-shadow: 0 6px 12px 0 #000000 !important;
+  /* Larger shadow for raised effect, but doesn't work unless it has !important? I also don't really like it. */
+}
+
+main {
+  height: 100dvh;
+  width: 100dvw;
+  max-width: 100%;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  background-color: #FFE7F5;
+  background-image: radial-gradient(circle, transparent .3rem, #FFE7F5 .25rem), linear-gradient(#FECEEA, .025rem, transparent .1rem), linear-gradient(90deg, #FECEEA .025rem, transparent .1rem);
+  background-size: 1rem 1rem;
+  background-position: 1.055rem 1.055rem, 2.5rem 2.5rem, 2.5rem 2.5rem;
+}
+
+footer {
+  border: solid 1px !important;
+  border-color: #BA8B9F !important;
+}
