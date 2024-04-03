@@ -8,7 +8,7 @@
   <title>Rozy's Portfolio</title>
   <meta name="description" content="Rozy's Personal Portfolio">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="css/demo.css">
+  <link rel="stylesheet" href="css/about.css">
   <!--Favicon link-->
   <link rel="icon" type="image/x-icon" href="img/favicon.ico">
   <!--Boostrap 5.3.3 linked following insturctions from the Bootstrap documentation https://getbootstrap.com/-->
@@ -16,8 +16,27 @@
 </head>
 
 <body>
-  <p>This is the home page</p>
-  <p><a href="chatindex.html">Chat</a></p>
+    <header>
+        <nav id="mainNav" class="navbar navbar-expand-md sticky-top navbar-shrink py-3"
+            style="background-color: #FECEEA;">
+            <div class="container"><a class="navbar-brand d-flex align-items-center" href="index.html">
+                    <img src="../img/logo.png" alt="RM Logo">
+                </a><button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navcol-1"><span
+                        class="visually-hidden">Toggle navigation</span><span
+                        class="navbar-toggler-icon"></span></button>
+                <div id="navcol-1" class="collapse navbar-collapse">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="https://github.com/rozaliyamarkova">GitHub</a>
+                        </li>
+                    </ul>
+                    <a class="btn btn-primary shadow" role="button" href="chat.html" target="_blank">Let'sChat!</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
   <script src="js/client.js" async defer></script>
   <footer class="bg-body-tertiary text-center text-lg-start">
     <!-- Copyright -->
