@@ -1,16 +1,16 @@
 {
   "name": "ca4",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Rozy's Personal Portfolio",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server",
+    "dev": "nodemon server"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/rozaliyamarkova/CA4.git"
   },
-  "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
@@ -19,6 +19,10 @@
   "homepage": "https://github.com/rozaliyamarkova/CA4#readme",
   "dependencies": {
     "express": "^4.19.2",
+    "moment": "^2.30.1",
     "socket.io": "^4.7.5"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
   }
 }
