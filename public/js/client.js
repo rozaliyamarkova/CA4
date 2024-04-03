@@ -1,110 +1,64 @@
-//required for front end communication between client and server
-
+/* This client.js file was created followig the tutorial by Traversy Media (https://www.youtube.com/watch?v=jD7FnbI76Hg). Minor changes have been made.*/
+const chatForm = document.getElementById('chat-form');
+const chatMessages = document.querySelector('.chat-messages');
+const roomName = document.getElementById('room-name');
+const userList = document.getElementById('users');
+// Get username and room from URL
+const {
+  username,
+  room
+} = Qs.parse(location.search, {
+  ignoreQueryPrefix: true
+});
 const socket = io();
-
-const inboxPeople = document.querySelector(".inbox__people");
-
-
-let userName = "";
-let id;
-const newUserConnected = function (data) {
-    
-
-    //give the user a random unique id
-    id = Math.floor(Math.random() * 1000000);
-    userName = 'user-' +id;
-    //console.log(typeof(userName));   
-    
-
-    //emit an event with the user id
-    socket.emit("new user", userName);
-    //call
-    addToUsersBox(userName);
-};
-
-const addToUsersBox = function (userName) {
-    //This if statement checks whether an element of the user-userlist
-    //exists and then inverts the result of the expression in the condition
-    //to true, while also casting from an object to boolean
-    if (!!document.querySelector(`.${userName}-userlist`)) {
-        return;
-    
-    }
-    
-    //setup the divs for displaying the connected users
-    //id is set to a string including the username
-    const userBox = `
-    <div class="chat_id ${userName}-userlist">
-      <h5>${userName}</h5>
-    </div>
-  `;
-    //set the inboxPeople div with the value of userbox
-    inboxPeople.innerHTML += userBox;
-};
-
-//call 
-newUserConnected();
-
-//when a new user event is detected
-socket.on("new user", function (data) {
-  data.map(function (user) {
-          return addToUsersBox(user);
-      });
+// Join chatroom
+socket.emit('joinRoom', {
+  username,
+  room
 });
-
-//when a user leaves
-socket.on("user disconnected", function (userName) {
-  document.querySelector(`.${userName}-userlist`).remove();
+// Get room and users
+socket.on('roomUsers', ({
+  room,
+  users
+}) => {
+  outputRoomName(room);
+  outputUsers(users);
 });
-
-
-const inputField = document.querySelector(".message_form__input");
-const messageForm = document.querySelector(".message_form");
-const messageBox = document.querySelector(".messages__history");
-
-const addNewMessage = ({ user, message }) => {
-  const time = new Date();
-  const formattedTime = time.toLocaleString("en-US", { hour: "numeric", minute: "numeric" });
-
-  const receivedMsg = `
-  <div class="incoming__message">
-    <div class="received__message">
-      <p>${message}</p>
-      <div class="message__info">
-        <span class="message__author">${user}</span>
-        <span class="time_date">${formattedTime}</span>
-      </div>
-    </div>
-  </div>`;
-
-  const myMsg = `
-  <div class="outgoing__message">
-    <div class="sent__message">
-      <p>${message}</p>
-      <div class="message__info">
-        <span class="time_date">${formattedTime}</span>
-      </div>
-    </div>
-  </div>`;
-
-  //is the message sent or received
-  messageBox.innerHTML += user === userName ? myMsg : receivedMsg;
-};
-
-messageForm.addEventListener("submit", (e) => {
+// Message from server
+socket.on('message', message => {
+  console.log(message);
+  outputMessage(message);
+  // Scroll down
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+});
+// Message submit
+chatForm.addEventListener('submit', (e) => {
   e.preventDefault();
-  if (!inputField.value) {
-    return;
-  }
-
-  socket.emit("chat message", {
-    message: inputField.value,
-    nick: userName,
-  });
-
-  inputField.value = "";
+  // Get message text
+  const msg = e.target.elements.msg.value;
+  // Emit message to server
+  socket.emit('chatMessage', msg);
+  // Clear input
+  e.target.elements.msg.value = '';
+  e.target.elements.msg.focus();
 });
-
-socket.on("chat message", function (data) {
-  addNewMessage({ user: data.nick, message: data.message });
-});
+// Output message to DOM
+function outputMessage(message) {
+  const div = document.createElement('div');
+  div.classList.add('message');
+  div.innerHTML = `<p class="meta">${message.username} <span>${message.time}</span></p>
+    <p class="text">
+        ${message.text}
+    </p>`;
+  document.querySelector('.chat-messages').appendChild(div);
+}
+// Add room name to DOM
+function outputRoomName(room) {
+  roomName.innerText = room;
+}
+// Add users to DOM
+function outputUsers(users) {
+  userList.innerHTML = `
+    ${users.map(user => `<li>${user.username}</li>`).join('')}
+  `;
+}
