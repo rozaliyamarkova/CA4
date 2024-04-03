@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Live Chat</title>
+  <meta name="description" content="Rozy's Personal Portfolio Live Chat">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/chat.css">
+  <!--Favicon link-->
+  <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+</head>
+
+<body>
+  <!--For this section of the code, I followed a tutorial by Traversy Media (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). I changed the code so that users are able to name a room, rather than choose from a list. I edited the code a bit more so that it better suits my needs.-->
+  <div class="join-container">
+    <header class="join-header">
+      <h1><i class="fa-solid fa-terminal"></i> Hello World!</h1>
+    </header>
+    <main class="join-main">
+      <form action="chat.html">
+        <div class="form-control">
+          <label for="username">Username</label>
+          <input type="text" name="username" id="username" placeholder="Enter username..." required />
+        </div>
+        <div class="form-control">
+          <label for="room">Room</label>
+          <input type="text" name="room" id="room" placeholder="Enter room name..." required />
+        </div>
+        <button type="submit" class="btn">Join Chat</button>
+      </form>
+    </main>
+  </div>
+  <!--Connecting Font Awesome Kit to use icons-->
+  <script src="https://kit.fontawesome.com/a7a3f847d3.js" crossorigin="anonymous"></script>
+</body>
+
+</html>
