@@ -49,6 +49,13 @@ header nav.navbar {
   background-position: 1.055rem 1.055rem, 2.5rem 2.5rem, 2.5rem 2.5rem;
 }
 
+.banner-class {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+
 footer {
   border: solid 1px !important;
   border-color: #BA8B9F !important;
