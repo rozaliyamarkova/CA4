@@ -1,6 +1,6 @@
 /* This file was created following the tutorial by Travesy Media (https://www.youtube.com/watch?v=jD7FnbI76Hg). Some minor changes have been made so that it fits better my vision of the chat.*/
 
-onst path = require('path');
+const path = require('path');
 const http = require('http');
 const express = require('express');
 const socketio = require('socket.io');
