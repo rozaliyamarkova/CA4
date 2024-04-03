@@ -1,4 +1,5 @@
 /* This client.js file was created followig the tutorial by Traversy Media (https://www.youtube.com/watch?v=jD7FnbI76Hg). Minor changes have been made.*/
+const messageInput = document.getElementById('msg');
 const chatForm = document.getElementById('chat-form');
 const chatMessages = document.querySelector('.chat-messages');
 const roomName = document.getElementById('room-name');
@@ -52,6 +53,29 @@ function outputMessage(message) {
     </p>`;
   document.querySelector('.chat-messages').appendChild(div);
 }
+// When the user starts typing
+messageInput.addEventListener('keypress', () => {
+  socket.emit('typing', {
+    username, room
+  });
+});
+// Listen for typing event from server
+socket.on('typing', (data) => {
+  const typingIndicator = document.getElementById('typingIndicator');
+  typingIndicator.innerHTML = `${data.username} is typing...`;
+  typingIndicator.style.display = 'block';
+})
+// When the user stops typing
+chatForm.addEventListener('submit', () => {
+  socket.emit('stopTyping', {
+    room
+  });
+});
+// Listen for 'stopTyping' event from server
+socket.on('stopTyping', () => {
+  const typingIndicator = document.getElementById('typingIndicator');
+  typingIndicator.style.display = 'none'
+});
 // Add room name to DOM
 function outputRoomName(room) {
   roomName.innerText = room;

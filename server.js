@@ -59,6 +59,16 @@ io.on('connection', socket => {
             }
         });
     });
+
+    // When a user is typing
+    socket.on('typing', ({ username, room }) => {
+        socket.broadcast.to(room).emit('typing', { username });
+    });
+
+    //When the user stops typing
+    socket.on('stopTyping', ({ room }) => {
+        socket.broadcast.to(room).emit('stopTyping');
+    });
 });
 
 const PORT = 3000 || process.env.PORT;
