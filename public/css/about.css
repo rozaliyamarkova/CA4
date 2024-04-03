@@ -35,9 +35,11 @@ header nav.navbar {
   /* Larger shadow for raised effect, but doesn't work unless it has !important? I also don't really like it. */
 }
 
+
+
 #main {
-  height: 100dvh;
-  width: 100dvw;
+  height: 100%;
+  width: 100%;
   max-width: 100%;
   overflow-y: hidden;
   overflow-x: hidden;
